@@ -1,0 +1,75 @@
+spring:
+  application:
+    name: trabajo-practico-6-business-service
+  profiles:
+    active: dev
+
+# Configuración del cliente Feign
+data:
+  service:
+    url: http://localhost:8081
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+
+---
+# Profile de desarrollo
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+server:
+  port: 8080
+
+data:
+  service:
+    url: http://localhost:8081
+
+logging:
+  level:
+    um.prog2.trabajo.businessservice: DEBUG
+    feign: DEBUG
+
+---
+# Profile con MySQL
+spring:
+  config:
+    activate:
+      on-profile: mysql
+
+server:
+  port: 8080
+
+data:
+  service:
+    url: http://localhost:8081
+
+logging:
+  level:
+    um.prog2.trabajo.businessservice: INFO
+    feign: INFO
+
+---
+# Profile con PostgreSQL
+spring:
+  config:
+    activate:
+      on-profile: postgres
+
+server:
+  port: 8080
+
+data:
+  service:
+    url: http://localhost:8081
+
+logging:
+  level:
+    um.prog2.trabajo.businessservice: INFO
+    feign: INFO
