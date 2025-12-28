@@ -1,4 +1,4 @@
-package un.prog2.trabajo;
+package um.prog2.trabajo;
 
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
