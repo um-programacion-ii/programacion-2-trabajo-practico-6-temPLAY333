@@ -1,4 +1,4 @@
-package un.prog2.trabajo;
+package um.prog2.trabajo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
