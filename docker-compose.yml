@@ -1,0 +1,45 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: microservices_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: microservices_db
+      MYSQL_USER: microservices_user
+      MYSQL_PASSWORD: microservices_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - microservices_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  postgres:
+    image: postgres:16
+    container_name: microservices_postgres
+    environment:
+      POSTGRES_DB: microservices_db
+      POSTGRES_USER: microservices_user
+      POSTGRES_PASSWORD: microservices_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - microservices_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U microservices_user -d microservices_db"]
+      timeout: 20s
+      retries: 10
+
+volumes:
+  mysql_data:
+  postgres_data:
+
+networks:
+  microservices_network:
+    driver: bridge
